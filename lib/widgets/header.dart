@@ -7,44 +7,70 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppTheme.primaryColor,
+    return SizedBox(
+      width: 440,
       height: 100,
-      child: Row(
+      child: Stack(
         children: [
-          const SizedBox(width: 15),
-          Container(
-            width: 75,
-            height: 75,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(""),
+          // Fundo azul
+          Positioned(
+            left: 0,
+            top: 0,
+            child: Container(
+              width: 440,
+              height: 100,
+              decoration: const BoxDecoration(color: AppTheme.primaryColor),
+            ),
+          ),
+
+          // Logo
+          const Positioned(
+            left: 15,
+            top: 12,
+            child: SizedBox(
+              width: 75,
+              height: 75,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage("../src/assets/imgs/logo.png"),
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
             ),
           ),
-          const SizedBox(width: 20),
-          Expanded(
+
+          // Título
+          Positioned(
+            left: 120,
+            top: 18,
             child: Text(
               title,
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: AppTheme.titleStyle,
             ),
           ),
-          const SizedBox(width: 20),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              3,
-              (index) => Container(
-                margin: const EdgeInsets.symmetric(vertical: 2),
+
+          // Menu (três traços)
+          for (int i = 0; i < 3; i++)
+            Positioned(
+              left: 380,
+              top: 40 + (i * 10),
+              child: Container(
                 width: 40,
-                height: 2,
-                color: Colors.white,
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 3,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 20),
         ],
       ),
     );
   }
 }
+

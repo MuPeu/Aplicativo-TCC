@@ -5,6 +5,7 @@ class FaseCard extends StatelessWidget {
   final String titulo;
   final String descricao;
   final String imagemUrl;
+
   const FaseCard({
     super.key,
     required this.titulo,
@@ -14,32 +15,69 @@ class FaseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppTheme.cardColor,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return SizedBox(
+      width: 372,
+      height: 100,
+      child: Stack(
         children: [
-          Image.network(imagemUrl, width: 60, height: 60, fit: BoxFit.cover),
-          const SizedBox(width: 15),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  titulo,
-                  style: Theme.of(context).textTheme.headlineMedium,
+          // Fundo do card
+          Positioned(
+            left: 0,
+            top: 0,
+            child: Container(
+              width: 372,
+              height: 100,
+              decoration: const BoxDecoration(color: AppTheme.cardColor),
+            ),
+          ),
+
+          // Imagem lateral
+          Positioned(
+            left: 10,
+            top: 20,
+            child: SizedBox(
+              width: 60,
+              height: 60,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(imagemUrl),
+                    fit: BoxFit.fill,
+                  ),
                 ),
-                const SizedBox(height: 5),
-                Text(
-                  descricao,
-                  style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+          ),
+
+          // Título da fase
+          Positioned(
+            left: 85,
+            top: 8,
+            child: Text(
+              titulo,
+              style: const TextStyle(
+                color: AppTheme.accentColor,
+                fontSize: 30,
+                fontFamily: 'Lavishly Yours',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+
+          // Descrição
+          Positioned(
+            left: 85,
+            top: 35,
+            child: SizedBox(
+              width: 270,
+              child: Text(
+                descricao,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontFamily: 'Arial',
                 ),
-              ],
+              ),
             ),
           ),
         ],

@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
-import 'theme/app_theme.dart';
+import 'screens/fase1.dart';
+import 'screens/fase2.dart';
+import 'screens/fase3.dart';
+import 'screens/fase4.dart';
 
 void main() {
-  runApp(const PortaDeFergasApp());
+  runApp(const AppTCC());
 }
 
-class PortaDeFergasApp extends StatelessWidget {
-  const PortaDeFergasApp({super.key});
+class AppTCC extends StatelessWidget {
+  const AppTCC({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Porta de Fergas',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: const HomeScreen(),
+      title: 'App TCC',
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => const HomePage(),
+        '/fase1': (context) => const Fase1Page(),
+        '/fase2': (context) => const Fase2Page(),
+        '/fase3': (context) => const Fase3Page(),
+        '/fase4': (context) => const Fase4Page(),
+      },
     );
   }
 }
